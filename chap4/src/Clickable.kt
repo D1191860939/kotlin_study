@@ -40,7 +40,14 @@
      而如果使用了inner关键字来修饰时，那么该类就是内部类，此时是持有外部类的引用的
    - 如何在内部类中引用外部类对象：this@外部类
 
-   四、
+   四、sealed关键字
+   1. 作用：对可能创建的子类做出严格的限制
+   2. 形式：父类的所有子类都必须放置到同一个文件中，外部文件中的类是不能够继承该sealed类
+   3. 注意点：
+        - 通过sealed修饰的类，默认是open的，即允许被子类继承
+        - 在when结构中，一旦分支列全，则不需要默认分支
+        - 不能够被实例化，因为它只有一个private的构造器
+  
 
 
 
@@ -85,7 +92,9 @@ class RichButton : Clickable {
 
 fun main(args: Array<String>) {
 
-    Button().click()
+//    Button().click()
+
+//    Expr()
 }
 
 internal open class TalkiveButton : Focuable{
@@ -100,6 +109,14 @@ internal open class TalkiveButton : Focuable{
 //
 //    whisper()
 //}
+
+sealed class Expr {
+
+}
+
+class Num(val value: Int): Expr()
+
+class Sum(val left: Expr, val right: Expr): Expr()
 
 
 
